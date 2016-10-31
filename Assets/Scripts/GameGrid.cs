@@ -216,6 +216,19 @@ public class GameGrid : MonoBehaviour {
 		return cells;
 	}
 
+	public List<GridCell>GetLeapCells(GridCell gridCell, int leapM, int leapN)
+	{
+		List<GridCell>cells = GetCellsForDirection(gridCell, leapM, leapN, 1);
+		cells.AddRange(GetCellsForDirection(gridCell, leapM, -leapN, 1));
+		cells.AddRange(GetCellsForDirection(gridCell, -leapM, -leapN, 1));
+		cells.AddRange(GetCellsForDirection(gridCell, -leapM, leapN, 1));
+		cells.AddRange(GetCellsForDirection(gridCell, leapN, leapM, 1));
+		cells.AddRange(GetCellsForDirection(gridCell, -leapN, leapM, 1));
+		cells.AddRange(GetCellsForDirection(gridCell, -leapN, -leapM, 1));
+		cells.AddRange(GetCellsForDirection(gridCell, leapN, -leapM, 1));
+		return cells;
+	}
+
 	public List<GridCell>GetCellsForDirection(GridCell gridCell, int dirX, int dirY, int maxIterations=-1, bool travelThroughGamePieces=false)
 	{
 		List<GridCell>cells = new List<GridCell>();

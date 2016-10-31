@@ -6,14 +6,7 @@ public class Empress : GamePiece {
 
 	public override List<GridCell>GetMovementCells(GameGrid grid, GridCell cell)
 	{
-		List<GridCell>cells = grid.GetCellsForDirection(cell, 2, 1, 1);
-		cells.AddRange(grid.GetCellsForDirection(cell, 2, -1, 1));
-		cells.AddRange(grid.GetCellsForDirection(cell, -2, -1, 1));
-		cells.AddRange(grid.GetCellsForDirection(cell, -2, 1, 1));
-		cells.AddRange(grid.GetCellsForDirection(cell, 1, 2, 1));
-		cells.AddRange(grid.GetCellsForDirection(cell, -1, 2, 1));
-		cells.AddRange(grid.GetCellsForDirection(cell, -1, -2, 1));
-		cells.AddRange(grid.GetCellsForDirection(cell, 1, -2, 1));
+		List<GridCell>cells = grid.GetLeapCells(cell, 2, 1);
 		cells.AddRange(grid.GetParallelCells(cell));
 
 		return cells;
