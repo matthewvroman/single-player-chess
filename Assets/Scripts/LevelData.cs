@@ -20,6 +20,7 @@ public class LevelData : ScriptableObject{
 	public int m_gridWidth=8;
 	public int m_gridHeight=8;
 
+	[System.Serializable]
 	public class Placement
 	{
 		public int x;
