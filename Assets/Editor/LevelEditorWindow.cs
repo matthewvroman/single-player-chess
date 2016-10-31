@@ -139,10 +139,10 @@ public class LevelEditorWindow : EditorWindow {
 				if(m_currentLevelData != null)
 				{
 					
-					for(int i=0; i<m_currentLevelData.m_gridWidth; i++)
+					for(int i=0; i<m_currentLevelData.m_gridHeight; i++)
 					{
 						GUILayout.BeginHorizontal();
-						for(int j=0; j<m_currentLevelData.m_gridHeight; j++)
+						for(int j=0; j<m_currentLevelData.m_gridWidth; j++)
 						{
 							Texture texture = null;
 							GUI.backgroundColor = (i+j)%2==0?Color.grey:Color.white;
@@ -229,6 +229,6 @@ public class LevelEditorWindow : EditorWindow {
 
 	private void RemoveLevelListItemCallback(ReorderableList list)
 	{
-		
+
 	}
 }
