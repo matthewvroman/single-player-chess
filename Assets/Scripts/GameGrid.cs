@@ -28,32 +28,25 @@ public class GameGrid : MonoBehaviour {
 
 	private void Awake()
 	{
-		//TEMP
-		CreateGrid();
-
+		
 		TeamManager.Instance.SetTeamColor(0, Color.white);
 		TeamManager.Instance.SetTeamColor(1, Color.black);
 
-		CreateGamePiece("GamePieceRook", 0, 0, 0);
-		CreateGamePiece("GamePieceKnight", 1, 0, 0);
-		CreateGamePiece("GamePieceBishop", 2, 0, 0);
-		CreateGamePiece("GamePieceQueen", 3, 0, 0);
-		CreateGamePiece("GamePieceKing", 4, 0, 0);
-		CreateGamePiece("GamePieceBishop", 5, 0, 0);
-		CreateGamePiece("GamePieceKnight", 6, 0, 0);
-		CreateGamePiece("GamePieceRook", 7, 0, 0);
-		CreateGamePiece("GamePiecePawn", 0, 1, 0);
-		CreateGamePiece("GamePiecePawn", 1, 1, 0);
-		CreateGamePiece("GamePiecePawn", 2, 1, 0);
-		CreateGamePiece("GamePiecePawn", 3, 1, 0);
-		CreateGamePiece("GamePiecePawn", 4, 1, 0);
-		CreateGamePiece("GamePiecePawn", 5, 1, 0);
-		CreateGamePiece("GamePiecePawn", 6, 1, 0);
-		CreateGamePiece("GamePiecePawn", 7, 1, 0);
+		//TEMP
+		LoadLevel(1);
+	}
 
-		CreateGamePiece("GamePiecePawn", 0, 2, 1);
-		CreateGamePiece("GamePiecePawn", 7, 5, 1);
-		CreateGamePiece("GamePiecePawn", 7, 6, 1);
+	public void LoadLevel(int levelNumber)
+	{
+		LevelData levelData = Resources.Load<LevelData>("Levels/Level" + levelNumber.ToString());
+		LoadLevel(levelData);
+	}
+
+	public void LoadLevel(LevelData levelData)
+	{
+		m_gridHeight = levelData.m_gridHeight;
+		m_gridWidth = levelData.m_gridWidth;
+		CreateGrid(levelData);
 	}
 
 	private void OnEnable()
@@ -66,7 +59,7 @@ public class GameGrid : MonoBehaviour {
 		GridCell.OnClicked -= HandleOnGridCellClicked;
 	}
 
-	private void CreateGrid()
+	private void CreateGrid(LevelData levelData)
 	{
 		m_cells = new List<List<GridCell>>();
 		for(int x=0; x<m_gridWidth; x++)
@@ -83,9 +76,15 @@ public class GameGrid : MonoBehaviour {
 					prefab = m_oddCellBackground;
 				}
 
+				LevelData.Placement placement = null;
+				if(levelData != null)
+				{
+					placement = levelData.GetPlacement(x, y);
+				}
+
 				GameObject gameObject = (GameObject)GameObject.Instantiate(prefab, Vector3.zero, Quaternion.identity);
 				gameObject.transform.SetParent(this.transform);
-				gameObject.transform.localPosition = new Vector3((x - m_gridWidth/2.0f)*m_cellWidth, (y - m_gridHeight/2.0f)*m_cellHeight);
+				gameObject.transform.localPosition = new Vector3((x - m_gridWidth/2.0f)*m_cellWidth, -(y - m_gridHeight/2.0f)*m_cellHeight);
 
 				if(y==0)
 				{
@@ -94,7 +93,28 @@ public class GameGrid : MonoBehaviour {
 				GridCell gridCell = gameObject.AddComponent<GridCell>();
 				gridCell.SetCoords(x, y);
 				m_cells[m_cells.Count-1].Add(gridCell);
+
+				if(placement != null)
+				{
+					CreateGamePiece(placement.type, placement.x, placement.y, placement.team);
+				}
 			}
+		}
+	}
+
+	public void CreateGamePiece(LevelData.PlaceableType type, int x, int y, int teamId)
+	{
+		Debug.Log(type.ToString() + ", " + x + ", " + y + ", " + teamId);
+		switch(type)
+		{
+			case LevelData.PlaceableType.Bishop:
+			case LevelData.PlaceableType.King:
+			case LevelData.PlaceableType.Knight:
+			case LevelData.PlaceableType.Pawn:
+			case LevelData.PlaceableType.Queen:
+			case LevelData.PlaceableType.Rook:
+				CreateGamePiece("GamePiece" + type.ToString(), x, y, teamId);
+				break;
 		}
 	}
 

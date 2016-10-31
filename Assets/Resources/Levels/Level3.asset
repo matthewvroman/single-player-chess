@@ -13,3 +13,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_gridWidth: 1
   m_gridHeight: 1
+  m_placements: []

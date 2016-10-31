@@ -139,15 +139,15 @@ public class LevelEditorWindow : EditorWindow {
 				if(m_currentLevelData != null)
 				{
 					
-					for(int i=0; i<m_currentLevelData.m_gridHeight; i++)
+					for(int y=0; y<m_currentLevelData.m_gridHeight; y++)
 					{
 						GUILayout.BeginHorizontal();
-						for(int j=0; j<m_currentLevelData.m_gridWidth; j++)
+						for(int x=0; x<m_currentLevelData.m_gridWidth; x++)
 						{
 							Texture texture = null;
-							GUI.backgroundColor = (i+j)%2==0?Color.grey:Color.white;
+							GUI.backgroundColor = (y+x)%2==0?Color.grey:Color.white;
 							GUI.contentColor = Color.white;
-							LevelData.Placement placement = m_currentLevelData.GetPlacement(i, j);
+							LevelData.Placement placement = m_currentLevelData.GetPlacement(x, y);
 							if(placement != null)
 							{
 								switch(placement.type)
@@ -187,13 +187,15 @@ public class LevelEditorWindow : EditorWindow {
 								switch(m_currentPlaceableType)
 								{
 									case LevelData.PlaceableType.DefaultCell:
-										m_currentLevelData.RemovePlacement(i, j);
+										m_currentLevelData.RemovePlacement(x, y);
 										break;
 									default:
-										m_currentLevelData.SetPlacement(m_currentPlaceableType, i, j, m_currentTeamIndex);
+										m_currentLevelData.SetPlacement(m_currentPlaceableType, x, y, m_currentTeamIndex);
 										break;
 
 								}
+
+								EditorUtility.SetDirty(m_currentLevelData);
 								
 							}
 							//GUILayout.Box(texture, new GUILayoutOption[]{GUILayout.Width(50 * m_zoomSlider), GUILayout.Height(50 * m_zoomSlider)});

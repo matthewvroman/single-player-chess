@@ -9,7 +9,7 @@ public class Pawn : GamePiece {
 	{
 		get
 		{
-			return TeamId==TeamManager.Instance.PlayerTeamId?1:-1;
+			return TeamId==TeamManager.Instance.PlayerTeamId?-1:1;
 		}
 	}
 

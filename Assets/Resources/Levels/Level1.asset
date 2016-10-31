@@ -13,3 +13,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_gridWidth: 1
   m_gridHeight: 5
+  m_placements:
+  - x: 0
+    y: 4
+    type: 2
+    team: 0
+  - x: 0
+    y: 2
+    type: 0
+    team: 1
