@@ -4,12 +4,6 @@ using System.Collections;
 
 public class GridCell : MonoBehaviour{
 
-	public enum CellType
-	{
-		Default,
-		Empty
-	}
-
 	public static Action<GridCell>OnClicked;
 	public static Action<GridCell, GamePiece>OnGamePieceSet;
 

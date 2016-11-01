@@ -11,14 +11,82 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 939715dfe5f7140cf9217951162fc4dd, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  m_gridWidth: 1
-  m_gridHeight: 5
+  m_gridWidth: 8
+  m_gridHeight: 8
   m_placements:
   - x: 0
     y: 4
     type: 2
     team: 0
   - x: 0
-    y: 2
+    y: 0
     type: 0
     team: 1
+  - x: 0
+    y: 1
+    type: 0
+    team: 1
+  - x: 1
+    y: 0
+    type: 0
+    team: 1
+  - x: 7
+    y: 0
+    type: 0
+    team: 1
+  - x: 6
+    y: 0
+    type: 0
+    team: 1
+  - x: 7
+    y: 1
+    type: 0
+    team: 1
+  - x: 7
+    y: 7
+    type: 0
+    team: 1
+  - x: 7
+    y: 6
+    type: 0
+    team: 1
+  - x: 6
+    y: 7
+    type: 0
+    team: 1
+  - x: 0
+    y: 7
+    type: 0
+    team: 1
+  - x: 1
+    y: 7
+    type: 0
+    team: 1
+  - x: 0
+    y: 6
+    type: 0
+    team: 1
+  - x: 4
+    y: 4
+    type: 0
+    team: 1
+  - x: 3
+    y: 4
+    type: 0
+    team: 1
+  - x: 3
+    y: 3
+    type: 0
+    team: 1
+  - x: 4
+    y: 3
+    type: 0
+    team: 1
+  - x: 4
+    y: 7
+    type: 3
+    team: 0
+  - x: 3
+    y: 7
+    type: 3
+    team: 0

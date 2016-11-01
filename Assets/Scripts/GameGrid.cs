@@ -33,7 +33,7 @@ public class GameGrid : MonoBehaviour {
 		TeamManager.Instance.SetTeamColor(1, Color.black);
 
 		//TEMP
-		LoadLevel(1);
+		LoadLevel(2);
 	}
 
 	public void LoadLevel(int levelNumber)
@@ -84,15 +84,24 @@ public class GameGrid : MonoBehaviour {
 
 				GameObject gameObject = (GameObject)GameObject.Instantiate(prefab, Vector3.zero, Quaternion.identity);
 				gameObject.transform.SetParent(this.transform);
-				gameObject.transform.localPosition = new Vector3((x - m_gridWidth/2.0f)*m_cellWidth, -(y - m_gridHeight/2.0f)*m_cellHeight);
+				gameObject.transform.localPosition = new Vector3((x - m_gridWidth/2.0f)*m_cellWidth + m_cellWidth/2.0f, -(y - m_gridHeight/2.0f)*m_cellHeight - m_cellWidth/2.0f);
 
 				if(y==0)
 				{
 					m_cells.Add(new List<GridCell>());
 				}
-				GridCell gridCell = gameObject.AddComponent<GridCell>();
-				gridCell.SetCoords(x, y);
-				m_cells[m_cells.Count-1].Add(gridCell);
+
+				if(placement != null && placement.type == LevelData.PlaceableType.EmptyCell)
+				{
+					Destroy(gameObject);
+					m_cells[m_cells.Count-1].Add(null);
+				}
+				else
+				{
+					GridCell gridCell = gameObject.AddComponent<GridCell>();
+					gridCell.SetCoords(x, y);
+					m_cells[m_cells.Count-1].Add(gridCell);
+				}
 
 				if(placement != null)
 				{
